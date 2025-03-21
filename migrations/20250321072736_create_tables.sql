@@ -1,0 +1,20 @@
+-- +goose Up
+CREATE TABLE IF NOT EXISTS Currencies (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Code VARCHAR(10) NOT NULL,
+    FullName VARCHAR(255) NOT NULL,
+    Sign VARCHAR(10)
+);
+
+CREATE TABLE IF NOT EXISTS ExchangeRates (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    BaseCurrencyId INTEGER NOT NULL,
+    TargetCurrencyId INTEGER NOT NULL,
+    Rate DECIMAL(6) NOT NULL,
+    FOREIGN KEY (BaseCurrencyId) REFERENCES Currencies(ID),
+    FOREIGN KEY (TargetCurrencyId) REFERENCES Currencies(ID)
+);
+
+-- +goose Down
+DROP TABLE IF EXISTS ExchangeRates;
+DROP TABLE IF EXISTS Currencies;
