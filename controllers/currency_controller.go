@@ -52,7 +52,7 @@ func CurrenciesHandler(w http.ResponseWriter, r *http.Request) {
 				"error": "Currency with that code already exists",
 			})
 			return
-		} else if err != nil && !errors.Is(err, sql.ErrNoRows) {
+		} else if !errors.Is(err, sql.ErrNoRows) {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(map[string]string{
 				"error": err.Error(),

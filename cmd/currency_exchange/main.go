@@ -15,10 +15,11 @@ func main() {
 	defer models.DB.Close()
 
 	http.HandleFunc("/currencies", controllers.CurrenciesHandler)
-	http.HandleFunc("/currencies/{code}", controllers.CurrencyCodeHandler)
+	http.HandleFunc("/currencies/", controllers.CurrencyCodeHandler)
 
+	http.HandleFunc("/exchange", controllers.ExchangeHandler)
 	http.HandleFunc("/exchangeRates", controllers.ExchangeRatesHandler)
-	http.HandleFunc("/exchangeRate/{pair}", controllers.ExchangeRatePairHandler)
+	http.HandleFunc("/exchangeRate/", controllers.ExchangeRatePairHandler)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("salam aleykum"))
 	})
